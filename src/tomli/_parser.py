@@ -646,6 +646,12 @@ def parse_value(  # noqa: C901
     if first_four in {"-inf", "+inf", "-nan", "+nan"}:
         return pos + 4, parse_float(first_four)
 
+    # null
+    if first_three in {"nil"}:
+        return pos + 3, None
+    if first_four in {"null", "None", "none"}:
+        return pos + 4, None
+        
     raise suffixed_err(src, pos, "Invalid value")
 
 
